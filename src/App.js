@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PlayerInput from './textInputAndAdd';
 import TeamList from './list';
+import AddList from './AddList';
 
 export default class App extends Component {
     
@@ -16,6 +17,16 @@ export default class App extends Component {
         
         this.addPlayer = this.addPlayer.bind(this);
             
+    }
+    
+    add(currentState) {
+        console.log('currentState = ' + currentState)
+        var newState = {currentState: ''};
+        var items = this.state[teamName];
+        items.push(currentState);
+        newState[teamName] = team;
+        
+        this.setState(newState);
     }
     
     addPlayer(playerName) {
@@ -47,13 +58,16 @@ export default class App extends Component {
         return (
             <div>
                  <div>
-                        <button onClick={() => this.selectTeam(1)}>Team 1</button>
-                        <button onClick={() => this.selectTeam(2)}>Team 2</button>
+                    <button onClick={() => this.selectTeam(1)}>Team 1</button>
+                    <button onClick={() => this.selectTeam(2)}>Team 2</button>
                   </div>
                   <PlayerInput addPlayer={this.addPlayer} />
                   <div>
                      <TeamList header="Team 1" team={this.state.team1} />
                      <TeamList header="Team 2" team={this.state.team2} />   
+                </div>
+                <div>
+                    <AddList />
                 </div>
             </div>
             
